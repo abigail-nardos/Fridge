@@ -4,21 +4,62 @@ import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 public class FoodItem {
+
+    //e.g. tomato, milk
     public String name;
+
+    //e.g. vegetable, protein, grain
     public String category;
+
+    //date FoodItem is expiring
     public Date expirationDate;
+
 
     public FoodItem() {
         name = "";
         category = "";
         expirationDate = new Date();
     }
+
+
     public FoodItem(String name, String category, Date expirationDate) {
         this.name = name;
         this.category = category;
         this.expirationDate = expirationDate;
     }
 
+    //returns FoodItem's name
+    public String getName() {
+        return name;
+    }
+
+    //returns FoodItem's category
+    public String getCategory() {
+        return category;
+    }
+
+    //returns FoodItem's expiration date
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
+
+    //sets FoodItem's name to name
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    //sets FoodItem's category to category
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    //sets FoodItem's expiration date to exiprationDate
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+
+    //returns boolean if FoodItem is expired
     public boolean isExpired() {
         Date date = new Date();
         if (expirationDate.before(date)) {
@@ -27,57 +68,11 @@ public class FoodItem {
         return false;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public Date getExpirationDate() {
-        return expirationDate;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void categoryScanner(String categories) {
-        Scanner scanner = new Scanner(System.in);
-        boolean valid = false;
-        String inputCategory = "";
-        while (!valid) {
-            System.out.print("please enter a valid food category: ");
-            inputCategory = scanner.nextLine();
-            switch (inputCategory) {
-                case "fruit", "vegetable", "dairy", "protein", "grains", "condiment" -> {
-                    valid = true;
-                    this.category = inputCategory;
-                }
-            }
-        }
-    }
-    public void setCategory(String category) {
-        this.category = category; //issue using category scanner
-        /*String categories = "fruit vegetable dairy protein grains";
-        if (categories.contains(category)) {
-            this.category = category;
-        }
-        else {
-            categoryScanner(categories);
-        }*/
-    }
-
-    public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
+    //creates string of FoodItem
     public String toString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
         String str = formatter.format(expirationDate);
-        return name + ", " + category + ", " + ", " + str;
+        return category + ": " + name + ", " + "Due: " + str;
 
     }
-
 }
